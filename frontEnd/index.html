@@ -30,22 +30,69 @@
                     Nome do livro
                 </label>
 
-                <input class="form-input" type="text" id="nomeLivro" placeholder="Digite o nome do livro" required>
+                <input
+                    class="form-input"
+                    type="text"
+                    id="nomeLivro"
+                    placeholder="Digite o nome do livro"
+                    required
+                >
 
                 <label class="form-label" for="precoLivro">
                     Preço
                 </label>
 
-                <input class="form-input" type="number" id="precoLivro" placeholder="Digite o preço" step="0.01" min="0"
-                    required>
+                <input
+                    class="form-input"
+                    type="number"
+                    id="precoLivro"
+                    placeholder="Digite o preço"
+                    step="0.01"
+                    min="0"
+                    required
+                >
 
-                <button class="btn btn-primary" type="submit">
+                <button
+                    class="btn btn-primary"
+                    type="submit"
+                >
                     Cadastrar Livro
                 </button>
 
             </form>
 
-            <div class="lista" id="listaLivros"></div>
+            <div class="busca">
+
+                <label class="form-label" for="idLivro">
+                    Buscar livro por ID
+                </label>
+
+                <div class="busca-linha">
+
+                    <input
+                        class="form-input"
+                        type="number"
+                        id="idLivro"
+                        placeholder="Digite o ID do livro"
+                        min="1"
+                    >
+
+                    <button
+                        class="btn btn-search"
+                        type="button"
+                        onclick="buscarLivroPorId()"
+                    >
+                        Buscar
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div
+                class="lista"
+                id="listaLivros"
+            ></div>
 
         </section>
 
@@ -59,21 +106,67 @@
                     Nome do cliente
                 </label>
 
-                <input class="form-input" type="text" id="nomeCliente" placeholder="Digite o nome do cliente" required>
+                <input
+                    class="form-input"
+                    type="text"
+                    id="nomeCliente"
+                    placeholder="Digite o nome do cliente"
+                    required
+                >
 
                 <label class="form-label" for="emailCliente">
                     E-mail
                 </label>
 
-                <input class="form-input" type="email" id="emailCliente" placeholder="Digite o e-mail" required>
+                <input
+                    class="form-input"
+                    type="email"
+                    id="emailCliente"
+                    placeholder="Digite o e-mail"
+                    required
+                >
 
-                <button class="btn btn-primary" type="submit">
+                <button
+                    class="btn btn-primary"
+                    type="submit"
+                >
                     Cadastrar Cliente
                 </button>
 
             </form>
 
-            <div class="lista" id="listaClientes"></div>
+            <div class="busca">
+
+                <label class="form-label" for="idCliente">
+                    Buscar cliente por ID
+                </label>
+
+                <div class="busca-linha">
+
+                    <input
+                        class="form-input"
+                        type="number"
+                        id="idCliente"
+                        placeholder="Digite o ID do cliente"
+                        min="1"
+                    >
+
+                    <button
+                        class="btn btn-search"
+                        type="button"
+                        onclick="buscarClientePorId()"
+                    >
+                        Buscar
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div
+                class="lista"
+                id="listaClientes"
+            ></div>
 
         </section>
 

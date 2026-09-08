@@ -8,6 +8,9 @@
     --color-text: #222222;
     --color-border: #dcdfe4;
 
+    --color-search: #2980b9;
+    --color-search-hover: #21618c;
+
     --color-edit: #d68910;
     --color-edit-hover: #b9770e;
 
@@ -139,6 +142,17 @@ body {
     background-color: var(--color-primary-dark);
 }
 
+.btn-search {
+    padding: 0.8rem 1rem;
+    background-color: var(--color-search);
+    color: white;
+    font-size: 0.9rem;
+}
+
+.btn-search:hover {
+    background-color: var(--color-search-hover);
+}
+
 .btn-edit,.btn-delete {
     padding: 0.6rem 0.9rem;
     font-size: 0.85rem;
@@ -160,6 +174,22 @@ body {
 
 .btn-delete:hover {
     background-color: var(--color-delete-hover);
+}
+
+
+/* BUSCA */
+.busca {
+    margin-top: 2rem;
+}
+
+.busca-linha {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+}
+
+.busca-linha .form-input {
+    flex: 1;
 }
 
 
@@ -212,6 +242,10 @@ body {
 
     .card {
         padding: 1.5rem;
+    }
+
+    .busca-linha {
+        flex-direction: column;
     }
 
     .acoes {

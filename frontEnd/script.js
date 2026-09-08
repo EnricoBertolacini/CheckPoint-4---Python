@@ -8,15 +8,22 @@ const formCliente = document.querySelector("#formCliente");
 
 /* LISTAR LIVROS */
 async function listarLivros() {
-  const resposta = await fetch(`${API_URL}/livros`);
 
-  const livros = await resposta.json();
+    const resposta = await fetch(`${API_URL}/livros`);
 
-  listaLivros.innerHTML = "";
+    const livros = await resposta.json();
 
-  livros.forEach((livro) => {
-    listaLivros.innerHTML += `
+    listaLivros.innerHTML = "";
+
+    livros.forEach((livro) => {
+
+        listaLivros.innerHTML += `
             <div class="item-lista">
+
+                <p>
+                    <strong>ID:</strong>
+                    ${livro.id}
+                </p>
 
                 <p>
                     <strong>Nome:</strong>
@@ -48,20 +55,28 @@ async function listarLivros() {
 
             </div>
         `;
-  });
+    });
 }
+
 
 /* LISTAR CLIENTES */
 async function listarClientes() {
-  const resposta = await fetch(`${API_URL}/clientes`);
 
-  const clientes = await resposta.json();
+    const resposta = await fetch(`${API_URL}/clientes`);
 
-  listaClientes.innerHTML = "";
+    const clientes = await resposta.json();
 
-  clientes.forEach((cliente) => {
-    listaClientes.innerHTML += `
+    listaClientes.innerHTML = "";
+
+    clientes.forEach((cliente) => {
+
+        listaClientes.innerHTML += `
             <div class="item-lista">
+
+                <p>
+                    <strong>ID:</strong>
+                    ${cliente.id}
+                </p>
 
                 <p>
                     <strong>Nome:</strong>
@@ -93,146 +108,295 @@ async function listarClientes() {
 
             </div>
         `;
-  });
+    });
 }
+
+
+/* BUSCAR LIVRO POR ID */
+async function buscarLivroPorId() {
+
+    const id = document.querySelector("#idLivro").value;
+
+    if (!id) {
+        alert("Digite o ID do livro.");
+        return;
+    }
+
+    const resposta = await fetch(`${API_URL}/livros/${id}`);
+
+    if (!resposta.ok) {
+        alert("Livro não encontrado.");
+        return;
+    }
+
+    const livro = await resposta.json();
+
+    listaLivros.innerHTML = `
+        <div class="item-lista">
+
+            <p>
+                <strong>ID:</strong>
+                ${livro.id}
+            </p>
+
+            <p>
+                <strong>Nome:</strong>
+                ${livro.nome}
+            </p>
+
+            <p>
+                <strong>Preço:</strong>
+                R$ ${Number(livro.preco).toFixed(2)}
+            </p>
+
+            <div class="acoes">
+
+                <button
+                    class="btn btn-edit"
+                    onclick="editarLivro(${livro.id})"
+                >
+                    Editar
+                </button>
+
+                <button
+                    class="btn btn-delete"
+                    onclick="excluirLivro(${livro.id})"
+                >
+                    Excluir
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* BUSCAR CLIENTE POR ID */
+async function buscarClientePorId() {
+
+    const id = document.querySelector("#idCliente").value;
+
+    if (!id) {
+        alert("Digite o ID do cliente.");
+        return;
+    }
+
+    const resposta = await fetch(`${API_URL}/clientes/${id}`);
+
+    if (!resposta.ok) {
+        alert("Cliente não encontrado.");
+        return;
+    }
+
+    const cliente = await resposta.json();
+
+    listaClientes.innerHTML = `
+        <div class="item-lista">
+
+            <p>
+                <strong>ID:</strong>
+                ${cliente.id}
+            </p>
+
+            <p>
+                <strong>Nome:</strong>
+                ${cliente.nome}
+            </p>
+
+            <p>
+                <strong>E-mail:</strong>
+                ${cliente.email}
+            </p>
+
+            <div class="acoes">
+
+                <button
+                    class="btn btn-edit"
+                    onclick="editarCliente(${cliente.id})"
+                >
+                    Editar
+                </button>
+
+                <button
+                    class="btn btn-delete"
+                    onclick="excluirCliente(${cliente.id})"
+                >
+                    Excluir
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
 
 /* CADASTRAR LIVRO */
 formLivro.addEventListener("submit", async (event) => {
-  event.preventDefault();
 
-  const nome = document.querySelector("#nomeLivro").value;
+    event.preventDefault();
 
-  const preco = document.querySelector("#precoLivro").value;
+    const nome = document.querySelector("#nomeLivro").value;
 
-  const livro = {
-    nome: nome,
-    preco: Number(preco),
-  };
+    const preco = document.querySelector("#precoLivro").value;
 
-  await fetch(`${API_URL}/livros`, {
-    method: "POST",
+    const livro = {
+        nome: nome,
+        preco: Number(preco)
+    };
 
-    headers: {
-      "Content-Type": "application/json",
-    },
+    await fetch(`${API_URL}/livros`, {
 
-    body: JSON.stringify(livro),
-  });
+        method: "POST",
 
-  formLivro.reset();
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-  listarLivros();
+        body: JSON.stringify(livro)
+
+    });
+
+    formLivro.reset();
+
+    listarLivros();
 });
+
 
 /* CADASTRAR CLIENTE */
 formCliente.addEventListener("submit", async (event) => {
-  event.preventDefault();
 
-  const nome = document.querySelector("#nomeCliente").value;
+    event.preventDefault();
 
-  const email = document.querySelector("#emailCliente").value;
+    const nome = document.querySelector("#nomeCliente").value;
 
-  const cliente = {
-    nome: nome,
-    email: email,
-  };
+    const email = document.querySelector("#emailCliente").value;
 
-  await fetch(`${API_URL}/clientes`, {
-    method: "POST",
+    const cliente = {
+        nome: nome,
+        email: email
+    };
 
-    headers: {
-      "Content-Type": "application/json",
-    },
+    await fetch(`${API_URL}/clientes`, {
 
-    body: JSON.stringify(cliente),
-  });
+        method: "POST",
 
-  formCliente.reset();
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-  listarClientes();
+        body: JSON.stringify(cliente)
+
+    });
+
+    formCliente.reset();
+
+    listarClientes();
 });
+
 
 /* EDITAR LIVRO */
 async function editarLivro(id) {
-  const novoNome = prompt("Digite o novo nome do livro:");
 
-  if (novoNome === null) {
-    return;
-  }
+    const novoNome = prompt(
+        "Digite o novo nome do livro:"
+    );
 
-  const novoPreco = prompt("Digite o novo preço do livro:");
+    if (novoNome === null) {
+        return;
+    }
 
-  if (novoPreco === null) {
-    return;
-  }
+    const novoPreco = prompt(
+        "Digite o novo preço do livro:"
+    );
 
-  const livroAtualizado = {
-    nome: novoNome,
-    preco: Number(novoPreco),
-  };
+    if (novoPreco === null) {
+        return;
+    }
 
-  await fetch(`${API_URL}/livros/${id}`, {
-    method: "PUT",
+    const livroAtualizado = {
+        nome: novoNome,
+        preco: Number(novoPreco)
+    };
 
-    headers: {
-      "Content-Type": "application/json",
-    },
+    await fetch(`${API_URL}/livros/${id}`, {
 
-    body: JSON.stringify(livroAtualizado),
-  });
+        method: "PUT",
 
-  listarLivros();
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(livroAtualizado)
+
+    });
+
+    listarLivros();
 }
+
 
 /* EDITAR CLIENTE */
 async function editarCliente(id) {
-  const novoNome = prompt("Digite o novo nome do cliente:");
 
-  if (novoNome === null) {
-    return;
-  }
+    const novoNome = prompt(
+        "Digite o novo nome do cliente:"
+    );
 
-  const novoEmail = prompt("Digite o novo e-mail do cliente:");
+    if (novoNome === null) {
+        return;
+    }
 
-  if (novoEmail === null) {
-    return;
-  }
+    const novoEmail = prompt(
+        "Digite o novo e-mail do cliente:"
+    );
 
-  const clienteAtualizado = {
-    nome: novoNome,
-    email: novoEmail,
-  };
+    if (novoEmail === null) {
+        return;
+    }
 
-  await fetch(`${API_URL}/clientes/${id}`, {
-    method: "PUT",
+    const clienteAtualizado = {
+        nome: novoNome,
+        email: novoEmail
+    };
 
-    headers: {
-      "Content-Type": "application/json",
-    },
+    await fetch(`${API_URL}/clientes/${id}`, {
 
-    body: JSON.stringify(clienteAtualizado),
-  });
+        method: "PUT",
 
-  listarClientes();
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(clienteAtualizado)
+
+    });
+
+    listarClientes();
 }
+
 
 /* EXCLUIR LIVRO */
 async function excluirLivro(id) {
-  await fetch(`${API_URL}/livros/${id}`, {
-    method: "DELETE",
-  });
 
-  listarLivros();
+    await fetch(`${API_URL}/livros/${id}`, {
+        method: "DELETE"
+    });
+
+    listarLivros();
 }
+
 
 /* EXCLUIR CLIENTE */
 async function excluirCliente(id) {
-  await fetch(`${API_URL}/clientes/${id}`, {
-    method: "DELETE",
-  });
 
-  listarClientes();
+    await fetch(`${API_URL}/clientes/${id}`, {
+        method: "DELETE"
+    });
+
+    listarClientes();
 }
+
 
 /* CARREGAR DADOS */
 listarLivros();
