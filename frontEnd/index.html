@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="header-title">Biblioteca</h1>
+
+        <p class="header-subtitle">
+            Gerenciamento de livros e clientes
+        </p>
+    </header>
+
+    <main class="container">
+
+        <section class="card livros">
+
+            <h2 class="card-title">Livros</h2>
+
+            <form class="form" id="formLivro">
+
+                <label class="form-label" for="nomeLivro">
+                    Nome do livro
+                </label>
+
+                <input class="form-input" type="text" id="nomeLivro" placeholder="Digite o nome do livro" required>
+
+                <label class="form-label" for="precoLivro">
+                    Preço
+                </label>
+
+                <input class="form-input" type="number" id="precoLivro" placeholder="Digite o preço" step="0.01" min="0"
+                    required>
+
+                <button class="btn btn-primary" type="submit">
+                    Cadastrar Livro
+                </button>
+
+            </form>
+
+            <div class="lista" id="listaLivros"></div>
+
+        </section>
+
+        <section class="card clientes">
+
+            <h2 class="card-title">Clientes</h2>
+
+            <form class="form" id="formCliente">
+
+                <label class="form-label" for="nomeCliente">
+                    Nome do cliente
+                </label>
+
+                <input class="form-input" type="text" id="nomeCliente" placeholder="Digite o nome do cliente" required>
+
+                <label class="form-label" for="emailCliente">
+                    E-mail
+                </label>
+
+                <input class="form-input" type="email" id="emailCliente" placeholder="Digite o e-mail" required>
+
+                <button class="btn btn-primary" type="submit">
+                    Cadastrar Cliente
+                </button>
+
+            </form>
+
+            <div class="lista" id="listaClientes"></div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
