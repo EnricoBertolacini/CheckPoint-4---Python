@@ -38,18 +38,24 @@ http://127.0.0.1:8000
 
 ```
 CheckPoint-4---Python/
-├── main.py                        # Ponto de entrada da API (FastAPI)
 │
-├── controller/                    # Camada de rotas (endpoints)
-│   ├── controller_livro.py        # Rotas de livros
-│   └── controller_cliente.py      # Rotas de clientes
+├── main.py                         # Ponto de entrada da API (FastAPI)
 │
-├── service/                       # Camada de regras de negócio
-│   ├── service_livro.py           # Lógica de livros
-│   └── service_cliente.py         # Lógica de clientes
+├── controller/                     # Camada de rotas (endpoints)
+│   ├── controller_livro.py         # Rotas de livros
+│   └── controller_cliente.py       # Rotas de clientes
 │
-├── database/                      # Camada de acesso a dados
-│   └── database.py                # Conexão e criação das tabelas (SQLite)
+├── service/                        # Camada de regras de negócio
+│   ├── service_livro.py            # Lógica de livros
+│   └── service_cliente.py          # Lógica de clientes
+│
+├── database/                       # Camada de acesso a dados
+│   └── database.py                 # Conexão e criação das tabelas (SQLite)
+│
+├── frontEnd/                       # Interface web da aplicação
+│   ├── index.html                  # Estrutura da página
+│   ├── style.css                   # Estilização da página
+│   └── script.js                   # Integração do front-end com a API
 │
 └── .gitignore
 ```
@@ -82,12 +88,36 @@ O projeto segue uma separação em três camadas:
 | PUT | `/clientes/{cliente_id}` | Atualizar um cliente |
 | DELETE | `/clientes/{cliente_id}` | Excluir um cliente |
 
+## 🖥️ Front-end
+
+A aplicação possui uma interface web desenvolvida em HTML, CSS e JavaScript, responsável pela interação do usuário com a API.
+
+A interface permite:
+
+- Cadastrar livros e clientes;
+- Listar os registros cadastrados;
+- Buscar livros e clientes por ID;
+- Editar registros;
+- Excluir registros.
+
+A comunicação entre o front-end e o backend é realizada utilizando a Fetch API do JavaScript, consumindo os endpoints desenvolvidos com FastAPI.
+
 ## 🛠️ Tecnologias utilizadas
 
 - Python 3
 - FastAPI
 - Uvicorn
 - SQLite
+- HTML5
+- CSS3
+- JavaScript
+
+## 📋 Regras de negócio
+
+- Os livros possuem nome e preço;
+- Os clientes possuem nome e e-mail.
+- Os dados cadastrados são armazenados no banco SQLite;
+- Livros e clientes podem ser cadastrados, consultados, atualizados e excluídos por meio da API.
 
 ## 📄 Sobre o banco de dados
 
